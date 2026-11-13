@@ -5,10 +5,11 @@ import pl.kk.quizmon.QuizMonApplication;
 import pl.kk.quizmon.infrastructure.ViewManager;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -19,14 +20,15 @@ public class AboutController {
     }
 
     @FXML
-    protected void onOLFButtonClick() {
-        try {
-            URI uri = Objects.requireNonNull(
-                    QuizMonApplication.class.getResource("fonts/Audiowide/OFL.txt")
-            ).toURI();
-            File file = new File(uri);
-            Desktop.getDesktop().open(file);
-        } catch (IOException | URISyntaxException e) {
+    protected void onOFLButtonClick() {
+        try (InputStream input = Objects.requireNonNull(
+                QuizMonApplication.class.getResourceAsStream("fonts/Audiowide/OFL.txt")
+        )) {
+            Path tempFile = Files.createTempFile("OFL-", ".txt");
+            tempFile.toFile().deleteOnExit();
+            Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            Desktop.getDesktop().open(tempFile.toFile());
+        } catch (IOException e) {
             Logger.getGlobal().severe(e.getMessage());
         }
     }

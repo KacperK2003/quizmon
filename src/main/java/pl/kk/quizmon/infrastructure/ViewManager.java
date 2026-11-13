@@ -90,7 +90,7 @@ public final class ViewManager {
         this.scene = scene;
     }
 
-    public static ViewManager getInstance() {
+    public static synchronized ViewManager getInstance() {
         if (instance == null)
             instance = new ViewManager();
 

@@ -45,9 +45,9 @@ This project is strictly educational and not intended for commercial use.
    cd quizmon
    ```
 
-3. Run the project using the provided IntelliJ configuration with the command:
+3. Run the project using Maven:
    ```bash
-   mvn compile exec:java
+   mvn clean javafx:run
    ```
 
 ## Licenses
@@ -61,9 +61,7 @@ External dependencies:
 | Library | License |
 |------------|----------|
 | JavaFX (OpenJFX) | [GPL v2 + Classpath Exception](https://openjdk.org/legal/gplv2+ce.html) |
-| ControlsFX | [BSD 3-Clause](https://opensource.org/licenses/BSD-3-Clause) |
-| JUnit 5 | [EPL 2.0](https://www.eclipse.org/legal/epl-2.0/) / [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
-| Apache Commons | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
+| JUnit | [EPL 2.0](https://www.eclipse.org/legal/epl-2.0/) / [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 | Gson / Guava / SQLite JDBC | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 
 Legal Notice

@@ -41,11 +41,15 @@ public class QuizController extends LifetimeController {
         List<Integer> ids = getThreeRandomIds();
         Pokemon[] pokemons = new Pokemon[3];
 
-        try {
-            for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++) {
+            try {
                 pokemons[i] = PokeApiService.getInstance().getPokemonData(Integer.toString(ids.get(i)));
-        } catch (IOException | URISyntaxException e) {
-            Logger.getGlobal().severe(e.getMessage());
+            } catch (IOException | URISyntaxException e) {
+                Logger.getGlobal().severe(e.getMessage());
+            }
+            if (pokemons[i] == null) {
+                pokemons[i] = Pokemon.getUnknown();
+            }
         }
 
         EventBusProvider.getEventBus().post(new QuizQuestionPreparedEvent(pokemons));
@@ -100,7 +104,7 @@ public class QuizController extends LifetimeController {
     @Subscribe
     public void onQuizQuestionPrepered(QuizQuestionPreparedEvent event) {
         Platform.runLater(() -> {
-            Pokemon[] pokemons = event.getPokemons();
+            Pokemon[] pokemons = event.pokemons();
             Random random = new Random();
             int correct = random.nextInt(0, 3);
 

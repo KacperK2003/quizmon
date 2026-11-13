@@ -16,7 +16,7 @@ public class DatabaseService {
         initializeDatabase();
     }
 
-    public static DatabaseService getInstance() {
+    public static synchronized DatabaseService getInstance() {
         if (instance == null)
             instance = new DatabaseService();
         return instance;

@@ -49,6 +49,9 @@ public class PokemonSelectorController {
         Pokemon pokemonDown = controllerDown.getData();
         Pokemon pokemonMiddle = controllerMiddle.getData();
 
+        if (pokemonDown == null || pokemonMiddle == null)
+            return;
+
         controllerUp.setData(pokemonMiddle);
         controllerMiddle.setData(pokemonDown);
 
@@ -80,6 +83,9 @@ public class PokemonSelectorController {
     protected void onUpButton() {
         Pokemon pokemonUp = controllerUp.getData();
         Pokemon pokemonMiddle = controllerMiddle.getData();
+
+        if (pokemonUp == null || pokemonMiddle == null)
+            return;
 
         controllerDown.setData(pokemonMiddle);
         controllerMiddle.setData(pokemonUp);

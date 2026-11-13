@@ -52,6 +52,7 @@ public class FavouriteController extends LifetimeController {
 
     @Override
     public void onUnload() {
+        super.onUnload();
         for (Node node : viewers)
             mainVBox.getChildren().remove(node);
         viewers.clear();
@@ -69,21 +70,24 @@ public class FavouriteController extends LifetimeController {
         if (favouriteList == null || favouriteList.isEmpty())
             return;
 
-        try {
-            for (Pokemon pokemon : favouriteList) {
-                FXMLLoader loader = new FXMLLoader(QuizMonApplication.class.getResource("views/components/favourite-pokemon-viewer.fxml"));
-                viewers.add(loader.load());
-                FavouritePokemonViewerController controller = loader.getController();
-                controller.setData(pokemon);
-                viewersControllers.add(controller);
-            }
-        } catch (IOException e) {
-            Logger.getGlobal().severe(e.getMessage());
-        }
-
         Platform.runLater(() -> {
-            for (Node node : viewers)
-                mainVBox.getChildren().add(node);
+            viewers.clear();
+            viewersControllers.clear();
+            mainVBox.getChildren().clear();
+
+            try {
+                for (Pokemon pokemon : favouriteList) {
+                    FXMLLoader loader = new FXMLLoader(QuizMonApplication.class.getResource("views/components/favourite-pokemon-viewer.fxml"));
+                    Node node = loader.load();
+                    viewers.add(node);
+                    FavouritePokemonViewerController controller = loader.getController();
+                    controller.setData(pokemon);
+                    viewersControllers.add(controller);
+                    mainVBox.getChildren().add(node);
+                }
+            } catch (IOException e) {
+                Logger.getGlobal().severe(e.getMessage());
+            }
         });
     }
 
