@@ -44,9 +44,9 @@ Ma on charakter wyłącznie edukacyjny i nie jest przeznaczony do komercyjnego w
    git clone https://github.com/KacperK2003/quizmon.git
    cd quizmon
    ```
-3. Uruchom projekt wykorzystując dołączoną konfigurację do IntelliJ z komendą:
+3. Uruchom projekt za pomocą Mavena:
    ```bash
-   mvn compile exec:java
+   mvn clean javafx:run
    ```
 
 ## Licencje
@@ -60,9 +60,7 @@ Zależności zewnętrzne:
 | Biblioteka | Licencja |
 |------------|----------|
 | JavaFX (OpenJFX) | [GPL v2 + Classpath Exception](https://openjdk.org/legal/gplv2+ce.html) |
-| ControlsFX | [BSD 3-Clause](https://opensource.org/licenses/BSD-3-Clause) |
-| JUnit 5 | [EPL 2.0](https://www.eclipse.org/legal/epl-2.0/) / [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
-| Apache Commons | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
+| JUnit | [EPL 2.0](https://www.eclipse.org/legal/epl-2.0/) / [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 | Gson / Guava / SQLite JDBC | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 
 Informacje prawne

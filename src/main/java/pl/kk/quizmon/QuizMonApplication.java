@@ -5,18 +5,17 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.apache.commons.configuration2.Configuration;
-import org.apache.commons.configuration2.builder.fluent.Configurations;
-import org.apache.commons.configuration2.ex.ConfigurationException;
 import pl.kk.quizmon.infrastructure.ViewManager;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 public class QuizMonApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Configuration config = prepareConfig();
+        Properties config = prepareConfig();
 
         if (config == null) {
             Logger.getGlobal().severe("Failed to load configuration file!");
@@ -24,9 +23,9 @@ public class QuizMonApplication extends Application {
             return;
         }
 
-        int width = config.getInt("app.width");
-        int height = config.getInt("app.height");
-        String title = config.getString("app.title");
+        int width = Integer.parseInt(config.getProperty("app.width"));
+        int height = Integer.parseInt(config.getProperty("app.height"));
+        String title = config.getProperty("app.title");
 
         Scene scene = prepareMainMenuScene(width, height);
 
@@ -38,11 +37,15 @@ public class QuizMonApplication extends Application {
         stage.show();
     }
 
-    private Configuration prepareConfig() {
-        Configurations configurations = new Configurations();
-        try {
-            return configurations.properties("pl/kk/quizmon/config.properties");
-        } catch (ConfigurationException e) {
+    private Properties prepareConfig() {
+        Properties properties = new Properties();
+        try (InputStream input = getClass().getResourceAsStream("config.properties")) {
+            if (input == null) {
+                return null;
+            }
+            properties.load(input);
+            return properties;
+        } catch (IOException e) {
             Logger.getGlobal().severe(e.getMessage());
             return null;
         }

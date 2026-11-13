@@ -21,6 +21,6 @@
       </TextArea>
     <HBox spacing="30">
       <Button prefWidth="Infinity" mnemonicParsing="false" text="Powrót" onAction="#onBackButtonClick"/>
-      <Button prefWidth="Infinity" mnemonicParsing="false" text="Otwórz OLF.txt" onAction="#onOLFButtonClick"/>
+      <Button prefWidth="Infinity" mnemonicParsing="false" text="Otwórz OFL.txt" onAction="#onOFLButtonClick"/>
     </HBox>
 </VBox>

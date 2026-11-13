@@ -120,7 +120,7 @@ public class PokedexController extends LifetimeController {
 
     @Subscribe
     public void onFetchPokemonData(FetchPokemonDataEvent event) {
-        Pokemon result = event.getResult();
+        Pokemon result = event.result();
         if (result == null || result == Pokemon.getUnknown()) {
             pokemonViewerController.setData(Pokemon.getUnknown());
             return;
